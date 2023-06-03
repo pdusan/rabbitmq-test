@@ -1,11 +1,10 @@
-app:
-  message: msg success
 spring:
   rabbitmq:
     host: localhost
     password: guest
     port: 15672
     username: guest
-
+    exchange: item.exchange
+    routingkey: item.routingkey
 server:
-  port: 8085
+  port: 8083

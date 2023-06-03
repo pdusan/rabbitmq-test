@@ -20,7 +20,7 @@ public class ConsumeService {
         this.userRepository = userRepository;
     }
 
-    @RabbitListener(queues = "item.queue")
+    @RabbitListener(queues = "item_queue_1")
     public void receivedMessage(Item item) {
         Item save = userRepository.save(item);
         logger.info("persisted " + save);

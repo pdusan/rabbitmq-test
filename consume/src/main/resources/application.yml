@@ -6,3 +6,5 @@ spring:
     username: guest
     exchange: item.exchange
     routingkey: item.routingkey
+server:
+  port: 8082

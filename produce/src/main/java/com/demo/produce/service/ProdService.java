@@ -1,7 +1,6 @@
 package com.demo.produce.service;
 
 import org.springframework.amqp.rabbit.core.RabbitTemplate;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
@@ -12,19 +11,16 @@ public class ProdService {
 
     private RabbitTemplate rabbitTemplate;
 
-    @Autowired
     public ProdService(RabbitTemplate rabbitTemplate) {
         this.rabbitTemplate = rabbitTemplate;
     }
 
-    @Value("${spring.rabbitmq.exchange}")
-    private String exchange;
+    public void sendItem(Item item) {
+        rabbitTemplate.convertAndSend("test_exchange", "item.test", item);
+    }
 
-    @Value("${spring.rabbitmq.routingkey}")
-    private String routingkey;
-
-    public void sendMessage(Item item) {
-        rabbitTemplate.convertAndSend(exchange, routingkey, item);
+    public void sendString(String item) {
+        rabbitTemplate.convertAndSend("test_exchange", "string.test", item);
     }
 
 }
